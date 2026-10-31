@@ -20,7 +20,7 @@ FROM dunglas/frankenphp:1-php8.4 AS app
 
 ENV APP_ENV=production \
     APP_DEBUG=false \
-    PORT=8080
+    PORT=80
 
 RUN install-php-extensions pdo_pgsql pdo_mysql intl zip bcmath gd opcache pcntl
 
@@ -41,6 +41,6 @@ RUN composer dump-autoload --optimize --no-dev --no-interaction \
     && chmod +x docker/entrypoint.sh \
     && chown -R www-data:www-data storage bootstrap/cache
 
-EXPOSE 8080
+EXPOSE 80
 
 ENTRYPOINT ["/app/docker/entrypoint.sh"]

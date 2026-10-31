@@ -33,5 +33,7 @@ services:
         value: sync
       - key: LOG_CHANNEL
         value: stderr
+      - key: RUN_MIGRATIONS
+        value: "true"          # single instance on Render, safe to migrate at boot
       - key: RUN_SEED
         value: "false"         # "true" for ONE deploy only if the admin user was not seeded yet

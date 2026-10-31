@@ -24,3 +24,6 @@ Homestead.yaml
 Thumbs.db
 .neon
 .mcp.json
+
+.vercel
+.env.local

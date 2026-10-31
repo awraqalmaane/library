@@ -4,13 +4,15 @@ set -e
 cd /app
 
 # Render (and most PaaS) tell us which port to listen on via $PORT
-export PORT="${PORT:-8080}"
+export PORT="${PORT:-80}"
 
 echo "==> Caching config, routes and views"
 php artisan optimize
 
-echo "==> Running migrations"
-php artisan migrate --force
+if [ "$RUN_MIGRATIONS" = "true" ]; then
+    echo "==> Running migrations (RUN_MIGRATIONS=true)"
+    php artisan migrate --force
+fi
 
 if [ "$RUN_SEED" = "true" ]; then
     echo "==> Seeding admin user (RUN_SEED=true)"
