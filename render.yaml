@@ -1,0 +1,35 @@
+# Render Blueprint - https://render.com/docs/blueprint-spec
+# Create the service from the dashboard: New + -> Blueprint -> pick this repo.
+services:
+  - type: web
+    name: awraq-almaani
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerfilePath: ./Dockerfile
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: "أوراق المعاني"
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: APP_KEY
+        sync: false            # php artisan key:generate --show
+      - key: APP_URL
+        sync: false            # https://<service-name>.onrender.com
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_URL
+        sync: false            # Neon connection string (postgresql://...?sslmode=require)
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: sync
+      - key: LOG_CHANNEL
+        value: stderr
+      - key: RUN_SEED
+        value: "false"         # set to "true" for ONE deploy to create the admin user, then back to "false"
