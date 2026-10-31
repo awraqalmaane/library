@@ -22,7 +22,9 @@ services:
       - key: DB_CONNECTION
         value: pgsql
       - key: DB_URL
-        sync: false            # Neon connection string (postgresql://...?sslmode=require)
+        sync: false            # Neon DATABASE_URL_UNPOOLED (the pooled URL breaks Laravel migrations)
+      - key: DB_PORT
+        value: "5432"
       - key: SESSION_DRIVER
         value: database
       - key: CACHE_STORE
@@ -32,4 +34,4 @@ services:
       - key: LOG_CHANNEL
         value: stderr
       - key: RUN_SEED
-        value: "false"         # set to "true" for ONE deploy to create the admin user, then back to "false"
+        value: "false"         # "true" for ONE deploy only if the admin user was not seeded yet
